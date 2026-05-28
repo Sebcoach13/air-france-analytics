@@ -1,4 +1,6 @@
-# ✈️ Air France Analytics — Pipeline de Données & CI/CD
+import os
+
+readme_content = """# ✈️ Air France Analytics — Pipeline de Données & CI/CD
 
 Ce projet met en place un pipeline de données complet, robuste et automatisé pour l'analyse des vols, de la capacité des avions et du taux de remplissage des passagers d'Air France. Il intègre une base de données **MariaDB**, un traitement analytique avec **Pandas**, une génération de données réalistes avec **Faker** et une validation automatisée via un pipeline **CI/CD (GitHub Actions)**.
 
@@ -22,8 +24,7 @@ air-france-analytics/
 │   └── air_france_data.sql    # Données d'ensemencement initiales (Seed)
 ├── .gitignore                 # Exclusion des fichiers temporaires et virtuels
 └── README.md                  # Documentation du projet
-
-Structure de la Base de Données (Schéma Relationnel)
+📊 Structure de la Base de Données (Schéma Relationnel)
 La base de données air_france_db est hautement relationnelle et s'articule autour de 4 tables clés :
 
 aeroports : Centralise les hubs et destinations (Code ID, Nom, Ville, Pays).
@@ -144,3 +145,9 @@ Visualisation : Matplotlib
 CI/CD & DevOps : GitHub Actions, YAML, Conteneurs Docker (Services GitHub)
 
 Gestion de version : Git & GitHub
+"""
+
+with open("README.md", "w", encoding="utf-8") as f:
+f.write(readme_content.strip())
+
+print("✅ Le fichier README.md a été régénéré proprement sans aucun bug !")
