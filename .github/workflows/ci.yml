@@ -1,0 +1,53 @@
+name: Air France Data Pipeline CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  pipeline-test:
+    runs-on: ubuntu-latest
+
+    services:
+      mariadb:
+        image: mariadb:10.6
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: air_france_db
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install mysql-connector-python sqlalchemy pandas faker
+
+    - name: Run Database Initialization Test
+      run: |
+        sed -i "s/'password': ''/'password': 'root'/g" scripts/init_db.py || true
+        sed -i "s/'password': 'password'/'password': 'root'/g" scripts/init_db.py || true
+        python scripts/init_db.py
+
+    - name: Run Passenger Generation Test
+      run: |
+        sed -i "s/'password': ''/'password': 'root'/g" scripts/generate_passengers.py || true
+        sed -i "s/'password': 'password'/'password': 'root'/g" scripts/generate_passengers.py || true
+        python scripts/generate_passengers.py
+
+    - name: Run Analytics Test
+      run: |
+        sed -i "s/PASSWORD = \"\"/PASSWORD = \"root\"/g" scripts/air_france_analytics.py || true
+        sed -i "s/PASSWORD = \"password\"/PASSWORD = \"root\"/g" scripts/air_france_analytics.py || true
+        python scripts/air_france_analytics.py
