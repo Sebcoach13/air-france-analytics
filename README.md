@@ -1,10 +1,10 @@
-# ✈️ Air France Analytics — Pipeline de Données & CI/CD
+#  Air France Analytics — Pipeline de Données & CI/CD
 
 Ce projet met en place un pipeline de données complet, robuste et automatisé pour l'analyse des vols, de la capacité des avions et du taux de remplissage des passagers d'Air France. Il intègre une base de données **MariaDB**, un traitement analytique avec **Pandas**, une génération de données réalistes avec **Faker** et une validation automatisée via un pipeline **CI/CD (GitHub Actions)**.
 
 ---
 
-## 🏗️ Architecture du Projet
+##  Architecture du Projet
 
 Le projet respecte une architecture claire et compartimentée :
 
@@ -22,7 +22,7 @@ air-france-analytics/
 │   └── air_france_data.sql    # Données d'ensemencement initiales (Seed)
 ├── .gitignore                 # Exclusion des fichiers temporaires et virtuels
 └── README.md                  # Documentation du projet
-📊 Structure de la Base de Données (Schéma Relationnel)
+ Structure de la Base de Données (Schéma Relationnel)
 La base de données air_france_db est hautement relationnelle et s'articule autour de 4 tables clés :
 
 aeroports : Centralise les hubs et destinations (Code ID, Nom, Ville, Pays).
@@ -70,7 +70,7 @@ erDiagram
     vols }|--|| aeroports : "part_de"
     vols }|--|| aeroports : "arrive_a"
     passagers }|--|| vols : "reserve"
-🚀 Installation et Utilisation Locale
+ Installation et Utilisation Locale
 1. Prérequis
 Python 3.10 ou supérieur
 
@@ -96,7 +96,7 @@ Aspire les tables SQL sous forme de DataFrames Pandas, calcule les taux de rempl
 
 PowerShell
 python scripts/air_france_analytics.py
-🤖 Pipeline CI/CD (GitHub Actions)
+ Pipeline CI/CD (GitHub Actions)
 Ce projet intègre une démarche DevOps de pointe grâce à un workflow d'Intégration Continue (ci.yml).
 
 Flux de Circulation des Données & Workflow CI/CD
@@ -129,7 +129,7 @@ Validation du script d'analyse métier (air_france_analytics.py).
 
 Le pipeline est configuré pour bloquer toute mise en production si un script lève une exception ou si une régression est détectée.
 
-🛠️ Technologies Utilisées
+ Technologies Utilisées
 Base de données : MariaDB / MySQL
 
 Langage & Driver : Python 3.10, mysql-connector-python
